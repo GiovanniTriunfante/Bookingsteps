@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <h2>Imóveis</h2>
+    <ul>
+        {% for imovel in imoveis %}
+        <li>{{ imovel.numero_apto }} - {{ imovel.bloco }} - {{ imovel.condominio }}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section>
+    <h2>Adicionar Novo Imóvel</h2>
+    <form method="post" action="/imoveis">
+        <label for="numero_apto">Número do Apartamento:</label>
+        <input type="text" name="numero_apto" required>
+        <label for="bloco">Bloco:</label>
+        <input type="text" name="bloco" required>
+        <label for="condominio">Condomínio:</label>
+        <input type="text" name="condominio" required>
+        <label for="proprietario">Proprietário:</label>
+        <input type="text" name="proprietario" required>
+        <button type="submit">Adicionar</button>
+    </form>
+</section>
+{% endblock %}
