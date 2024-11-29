@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+    <!-- Font Awesome for Icons (Optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex items-center justify-between">
+                <div>
+                    <a href="/" class="text-xl font-semibold text-gray-900">Gerenciador</a>
+                </div>
+                <ul class="flex space-x-4">
+                    <li><a href="/" class="text-gray-700 hover:text-blue-500 {{ 'font-bold' if request.path == '/' else '' }}">Dashboard</a></li>
+                    <li><a href="/reservas" class="text-gray-700 hover:text-blue-500 {{ 'font-bold' if request.path == '/reservas' else '' }}">Reservas</a></li>
+                    <li><a href="/imoveis" class="text-gray-700 hover:text-blue-500 {{ 'font-bold' if request.path == '/imoveis' else '' }}">Imóveis</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto px-4 py-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">{{ title }}</h1>
+        {% block content %}
+        <!-- Content specific to the page will go here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; {{ current_year }} Gerenciador de Reservas. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Scripts -->
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>

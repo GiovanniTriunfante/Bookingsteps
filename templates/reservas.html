@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white shadow rounded p-6">
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">Reservas</h2>
+    <form action="/reservas" method="POST" class="space-y-4">
+        <div>
+            <label for="nome_hospede" class="block text-sm font-medium text-gray-700">Nome do Hóspede</label>
+            <input type="text" name="nome_hospede" id="nome_hospede" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="entrada" class="block text-sm font-medium text-gray-700">Entrada</label>
+                <input type="date" name="entrada" id="entrada" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="saida" class="block text-sm font-medium text-gray-700">Saída</label>
+                <input type="date" name="saida" id="saida" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+        </div>
+        <div>
+            <label for="imovel_id" class="block text-sm font-medium text-gray-700">ID do Imóvel</label>
+            <input type="number" name="imovel_id" id="imovel_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+            <label for="nome_parceiro" class="block text-sm font-medium text-gray-700">Nome do Parceiro</label>
+            <input type="text" name="nome_parceiro" id="nome_parceiro" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded shadow hover:bg-blue-600 focus:ring-2 focus:ring-blue-500">
+            Adicionar Reserva
+        </button>
+    </form>
+
+    <hr class="my-6">
+
+    <ul class="divide-y divide-gray-200">
+        {% for reserva in reservas %}
+        <li class="py-4">
+            <p><strong>Hóspede:</strong> {{ reserva.nome_hospede }}</p>
+            <p><strong>Entrada:</strong> {{ reserva.entrada }}</p>
+            <p><strong>Saída:</strong> {{ reserva.saida }}</p>
+        </li>
+        {% else %}
+        <p class="text-gray-500">Nenhuma reserva encontrada.</p>
+        {% endfor %}
+    </ul>
+
+    <ul class="divide-y divide-gray-200">
+        {% for reserva in reservas %}
+        <li class="py-4 flex justify-between items-center">
+            <div>
+                <p><strong>Hóspede:</strong> {{ reserva.nome_hospede }}</p>
+                <p><strong>Entrada:</strong> {{ reserva.entrada }}</p>
+                <p><strong>Saída:</strong> {{ reserva.saida }}</p>
+                <p><strong>Imóvel:</strong> {{ reserva.imovel_id }}</p>
+                <p><strong>Parceiro:</strong> {{ reserva.nome_parceiro }}</p>
+            </div>
+            <div>
+                <!-- Botão de Edição -->
+                <a href="{{ url_for('editar_reserva_page', id_reserva=reserva.id) }}" 
+                   class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                    Editar
+                </a>
+            </div>
+        </li>
+        {% else %}
+        <p class="text-gray-500">Nenhuma reserva encontrada.</p>
+        {% endfor %}
+        
+    </ul>
+    
+</div>
+{% endblock %}
+
+
